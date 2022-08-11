@@ -91,7 +91,7 @@ class apt::params {
         'key'      => '630239CC130E1A7FD81A27B140976EAF437D05B5',
         'repos'    => 'main universe multiverse restricted',
       }
-      $ppa_options        = '-y'
+      $ppa_options        = ['-y']
       $ppa_package        = 'software-properties-common'
       $auth_conf_owner = '_apt'
     }
