@@ -45,7 +45,7 @@ be manipulated through the `apt-key` command.
 
 ### Tasks
 
-* [`init`](#init): Allows you to perform apt functions
+* [`init`](#init): Allows you to perform apt-get functions
 
 ## Classes
 
@@ -121,7 +121,7 @@ Default value: `$apt::params::key_options`
 
 ##### <a name="ppa_options"></a>`ppa_options`
 
-Data type: `Optional[String]`
+Data type: `Optional[Array[String]]`
 
 Supplies options to be passed to the `add-apt-repository` command.
 
@@ -165,10 +165,14 @@ Configures various update settings. Valid options: a hash made up from the follo
 
 Options:
 
-* **:frequency** `String`: Specifies how often to run `apt-get update`. If the exec resource `apt_update` is notified, `apt-get update` runs regardless of this value.
-Valid options: 'always' (at every Puppet run); 'daily' (if the value of `apt_update_last_success` is less than current epoch time minus 86400);
-'weekly' (if the value of `apt_update_last_success` is less than current epoch time minus 604800); and 'reluctantly' (only if the exec resource
-`apt_update` is notified). Default: 'reluctantly'.
+* **:frequency** `String`: Specifies how often to run `apt-get update`. If the exec resource `apt_update` is notified,
+`apt-get update` runs regardless of this value.
+Valid options:
+  'always' (at every Puppet run);
+   daily' (if the value of `apt_update_last_success` is less than current epoch time minus 86400);
+  'weekly' (if the value of `apt_update_last_success` is less than current epoch time minus 604800);
+  'reluctantly' (only if the exec resource `apt_update` is notified).
+Default: 'reluctantly'.
 * **:loglevel** `Integer`: Specifies the log level of logs outputted to the console. Default: undef.
 * **:timeout** `Integer`: Specifies how long to wait for the update to complete before canceling it. Valid options: an integer, in seconds. Default: undef.
 * **:tries** `Integer`: Specifies how many times to retry the update after receiving a DNS or HTTP error. Default: undef.
@@ -466,7 +470,7 @@ Default value: ``undef``
 
 ##### <a name="pin"></a>`pin`
 
-Data type: `Optional[Variant[Integer, String, Hash]]`
+Data type: `Variant[Integer, String, Hash]`
 
 Specifies a pin priority for the backports. Valid options: a number or string to be passed to the `id` parameter of the `apt::pin` defined
 type, or a hash of `parameter => value` pairs to be passed to `apt::pin`'s corresponding parameters.
@@ -475,7 +479,7 @@ Default value: `200`
 
 ##### <a name="include"></a>`include`
 
-Data type: `Optional[Variant[Hash]]`
+Data type: `Variant[Hash]`
 
 Specifies whether to include 'deb' or 'src', or both.
 
@@ -665,7 +669,7 @@ The following parameters are available in the `apt::pin` defined type:
 
 ##### <a name="ensure"></a>`ensure`
 
-Data type: `Optional[Enum['file', 'present', 'absent']]`
+Data type: `Enum['file', 'present', 'absent']`
 
 Specifies whether the pin should exist. Valid options: 'file', 'present', and 'absent'.
 
@@ -801,7 +805,7 @@ Default value: `'present'`
 
 ##### <a name="options"></a>`options`
 
-Data type: `Optional[String]`
+Data type: `Optional[Array[String]]`
 
 Supplies options to be passed to the `add-apt-repository` command. Default: '-y'.
 
@@ -869,7 +873,7 @@ Default value: `50`
 
 ##### <a name="ensure"></a>`ensure`
 
-Data type: `Optional[Enum['file', 'present', 'absent']]`
+Data type: `Enum['file', 'present', 'absent']`
 
 Specifies whether the file should exist. Valid options: 'present', 'absent', and 'file'.
 
@@ -935,8 +939,8 @@ The following parameters are available in the `apt::source` defined type:
 * [`pin`](#pin)
 * [`architecture`](#architecture)
 * [`allow_unsigned`](#allow_unsigned)
-* [`notify_update`](#notify_update)
 * [`allow_insecure`](#allow_insecure)
+* [`notify_update`](#notify_update)
 * [`check_valid_until`](#check_valid_until)
 
 ##### <a name="location"></a>`location`
@@ -981,7 +985,7 @@ Default value: `'main'`
 
 ##### <a name="include"></a>`include`
 
-Data type: `Optional[Variant[Hash]]`
+Data type: `Variant[Hash]`
 
 Configures include options. Valid options: a hash of available keys.
 
@@ -1038,14 +1042,6 @@ Specifies whether to authenticate packages from this release, even if the Releas
 
 Default value: ``false``
 
-##### <a name="notify_update"></a>`notify_update`
-
-Data type: `Boolean`
-
-Specifies whether to trigger an `apt-get update` run.
-
-Default value: ``true``
-
 ##### <a name="allow_insecure"></a>`allow_insecure`
 
 Data type: `Boolean`
@@ -1053,6 +1049,14 @@ Data type: `Boolean`
 Specifies whether to allow downloads from insecure repositories.
 
 Default value: ``false``
+
+##### <a name="notify_update"></a>`notify_update`
+
+Data type: `Boolean`
+
+Specifies whether to trigger an `apt-get update` run.
+
+Default value: ``true``
 
 ##### <a name="check_valid_until"></a>`check_valid_until`
 
@@ -1202,7 +1206,7 @@ Specifies whether or not to use a `DIRECT` target to bypass the system default p
 
 ### <a name="init"></a>`init`
 
-Allows you to perform apt functions
+Allows you to perform apt-get functions
 
 **Supports noop?** false
 
@@ -1212,5 +1216,5 @@ Allows you to perform apt functions
 
 Data type: `Enum[update, upgrade, dist-upgrade, autoremove]`
 
-Action to perform 
+Action to perform with apt-get
 

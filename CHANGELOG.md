@@ -2,45 +2,62 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
-## [v8.5.0](https://github.com/puppetlabs/puppetlabs-apt/tree/v8.5.0) - 2022-07-03
+## [v9.0.0](https://github.com/puppetlabs/puppetlabs-apt/tree/v9.0.0) (2022-08-18)
+
+[Full Changelog](https://github.com/puppetlabs/puppetlabs-apt/compare/v8.5.0...v9.0.0)
+
+### Changed
+
+- Harden PPA defined type [\#1052](https://github.com/puppetlabs/puppetlabs-apt/pull/1052) ([chelnak](https://github.com/chelnak))
+
+### Added
+
+- Deal with net-ftp being unavailable [\#1050](https://github.com/puppetlabs/puppetlabs-apt/pull/1050) ([ekohl](https://github.com/ekohl))
+- pdksync - \(GH-cat-11\) Certify Support for Ubuntu 22.04 [\#1046](https://github.com/puppetlabs/puppetlabs-apt/pull/1046) ([david22swan](https://github.com/david22swan))
+
+### Fixed
+
+- Harden apt-mark defined type [\#1051](https://github.com/puppetlabs/puppetlabs-apt/pull/1051) ([chelnak](https://github.com/chelnak))
+
+## [v8.5.0](https://github.com/puppetlabs/puppetlabs-apt/tree/v8.5.0) (2022-08-03)
 
 [Full Changelog](https://github.com/puppetlabs/puppetlabs-apt/compare/v8.4.1...v8.5.0)
 
 ### Added
 
-- \(GH-1038\) add support for `check-valid-until` configuration [#1042](https://github.com/puppetlabs/puppetlabs-apt/pull/1042) ([david22swan](https://github.com/david22swan))
+- \(GH-1038\) add support for `check-valid-until` configuration [\#1042](https://github.com/puppetlabs/puppetlabs-apt/pull/1042) ([david22swan](https://github.com/david22swan))
 
-## [v8.4.1](https://github.com/puppetlabs/puppetlabs-apt/tree/v8.4.1) - 2022-06-20
+## [v8.4.1](https://github.com/puppetlabs/puppetlabs-apt/tree/v8.4.1) (2022-06-20)
 
 [Full Changelog](https://github.com/puppetlabs/puppetlabs-apt/compare/v8.4.0...v8.4.1)
 
 ### Fixed
 
-- \(ISSUE-1036\) Conditional gnupg include added to init.pp [#1039](https://github.com/puppetlabs/puppetlabs-apt/pull/1039) ([david22swan](https://github.com/david22swan))
+- \(ISSUE-1036\) Conditional `gnupg` include added to init.pp [\#1039](https://github.com/puppetlabs/puppetlabs-apt/pull/1039) ([david22swan](https://github.com/david22swan))
 
-## [v8.4.0](https://github.com/puppetlabs/puppetlabs-apt/tree/v8.4.0) - 2022-06-06
+## [v8.4.0](https://github.com/puppetlabs/puppetlabs-apt/tree/v8.4.0) (2022-06-06)
 
 [Full Changelog](https://github.com/puppetlabs/puppetlabs-apt/compare/v8.3.0...v8.4.0)
 
-### Added
-
-- enable allow-insecure for apt::source defined types, includes new tes… [#1014](https://github.com/puppetlabs/puppetlabs-apt/pull/1014) ([hesco](https://github.com/hesco))
-
 ### Changed
 
-- (GH-iac-334) Remove code specific to unsupported OSs [#1024](https://github.com/puppetlabs/puppetlabs-apt/pull/1024) ([david22swan](https://github.com/david22swan))
+- \(GH-iac-334\) Remove code specific to unsupported OSs [\#1024](https://github.com/puppetlabs/puppetlabs-apt/pull/1024) ([david22swan](https://github.com/david22swan))
+
+### Added
+
+- enable allow-insecure for apt::source defined types, includes new tes… [\#1014](https://github.com/puppetlabs/puppetlabs-apt/pull/1014) ([hesco](https://github.com/hesco))
 
 ### Fixed
 
-- pdksync - (GH-iac-334) Remove Support for Ubuntu 14.04 [#1023](https://github.com/puppetlabs/puppetlabs-apt/pull/1023) ([david22swan](https://github.com/david22swan))
-- pdksync - (GH-iac-334) Remove Support for Ubuntu 16.04 [#1022](https://github.com/puppetlabs/puppetlabs-apt/pull/1022) ([david22swan](https://github.com/david22swan))
-- (MODULES-11301) Don't install gnupg if not needed [#1020](https://github.com/puppetlabs/puppetlabs-apt/pull/1020) ([simondeziel](https://github.com/simondeziel))
-- Use fact() function for all os.distro.* facts [#1017](https://github.com/puppetlabs/puppetlabs-apt/pull/1017) ([root-expert](https://github.com/root-expert))
-- (maint) Fix resource ordering when apt-transport-https is needed [#1015](https://github.com/puppetlabs/puppetlabs-apt/pull/1015) ([smortex](https://github.com/smortex))
-- Omit empty options in source.list template to fix MODULES-11174 [#1013](https://github.com/puppetlabs/puppetlabs-apt/pull/1013) ([mpdude](https://github.com/mpdude))
-- Replace `arm64` for `aarch64` in `::apt::source` [#1012](https://github.com/puppetlabs/puppetlabs-apt/pull/1012) ([mpdude](https://github.com/mpdude))
-- Fixed gpg file for Ubuntu versions 21.04 and later. [#1011](https://github.com/puppetlabs/puppetlabs-apt/pull/1011) ([Conzar](https://github.com/Conzar))
-- (MODULES-10763) Remove frequency collector [#1010](https://github.com/puppetlabs/puppetlabs-apt/pull/1010) ([LTangaF](https://github.com/LTangaF))
+- pdksync - \(GH-iac-334\) Remove Support for Ubuntu 14.04 [\#1023](https://github.com/puppetlabs/puppetlabs-apt/pull/1023) ([david22swan](https://github.com/david22swan))
+- pdksync - \(GH-iac-334\) Remove Support for Ubuntu 16.04 [\#1022](https://github.com/puppetlabs/puppetlabs-apt/pull/1022) ([david22swan](https://github.com/david22swan))
+- \(MODULES-11301\) Don't install gnupg if not needed [\#1020](https://github.com/puppetlabs/puppetlabs-apt/pull/1020) ([simondeziel](https://github.com/simondeziel))
+- Use fact\(\) function for all os.distro.\* facts [\#1017](https://github.com/puppetlabs/puppetlabs-apt/pull/1017) ([root-expert](https://github.com/root-expert))
+- \(maint\) Fix resource ordering when apt-transport-https is needed [\#1015](https://github.com/puppetlabs/puppetlabs-apt/pull/1015) ([smortex](https://github.com/smortex))
+- Omit empty options in source.list template to fix MODULES-11174 [\#1013](https://github.com/puppetlabs/puppetlabs-apt/pull/1013) ([mpdude](https://github.com/mpdude))
+- Replace `arm64` for `aarch64` in `::apt::source` [\#1012](https://github.com/puppetlabs/puppetlabs-apt/pull/1012) ([mpdude](https://github.com/mpdude))
+- Fixed gpg file for Ubuntu versions 21.04 and later. [\#1011](https://github.com/puppetlabs/puppetlabs-apt/pull/1011) ([Conzar](https://github.com/Conzar))
+- \(MODULES-10763\) Remove frequency collector [\#1010](https://github.com/puppetlabs/puppetlabs-apt/pull/1010) ([LTangaF](https://github.com/LTangaF))
 
 ## [v8.3.0](https://github.com/puppetlabs/puppetlabs-apt/tree/v8.3.0) (2021-10-04)
 
