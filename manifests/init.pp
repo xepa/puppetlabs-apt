@@ -37,10 +37,14 @@
 #   Configures various update settings. Valid options: a hash made up from the following keys:
 #
 # @option update [String] :frequency
-#   Specifies how often to run `apt-get update`. If the exec resource `apt_update` is notified, `apt-get update` runs regardless of this value.
-#   Valid options: 'always' (at every Puppet run); 'daily' (if the value of `apt_update_last_success` is less than current epoch time minus 86400);
-#   'weekly' (if the value of `apt_update_last_success` is less than current epoch time minus 604800); and 'reluctantly' (only if the exec resource
-#   `apt_update` is notified). Default: 'reluctantly'.
+#   Specifies how often to run `apt-get update`. If the exec resource `apt_update` is notified,
+#   `apt-get update` runs regardless of this value.
+#   Valid options:
+#     'always' (at every Puppet run); 
+#      daily' (if the value of `apt_update_last_success` is less than current epoch time minus 86400);
+#     'weekly' (if the value of `apt_update_last_success` is less than current epoch time minus 604800);
+#     'reluctantly' (only if the exec resource `apt_update` is notified).
+#   Default: 'reluctantly'.
 #
 # @option update [Integer] :loglevel
 #   Specifies the log level of logs outputted to the console. Default: undef.
@@ -122,38 +126,37 @@
 #   Specifies whether to perform force purge or delete. Default false.
 #
 class apt (
-  Hash $update_defaults         = $apt::params::update_defaults,
-  Hash $purge_defaults          = $apt::params::purge_defaults,
-  Hash $proxy_defaults          = $apt::params::proxy_defaults,
-  Hash $include_defaults        = $apt::params::include_defaults,
-  String $provider              = $apt::params::provider,
-  String $keyserver             = $apt::params::keyserver,
-  Optional[String] $key_options = $apt::params::key_options,
-  Optional[String] $ppa_options = $apt::params::ppa_options,
-  Optional[String] $ppa_package = $apt::params::ppa_package,
-  Optional[Hash] $backports     = $apt::params::backports,
-  Hash $confs                   = $apt::params::confs,
-  Hash $update                  = $apt::params::update,
-  Hash $purge                   = $apt::params::purge,
-  Apt::Proxy $proxy             = $apt::params::proxy,
-  Hash $sources                 = $apt::params::sources,
-  Hash $keys                    = $apt::params::keys,
-  Hash $ppas                    = $apt::params::ppas,
-  Hash $pins                    = $apt::params::pins,
-  Hash $settings                = $apt::params::settings,
-  Boolean $manage_auth_conf     = $apt::params::manage_auth_conf,
-  Array[Apt::Auth_conf_entry]
-  $auth_conf_entries            = $apt::params::auth_conf_entries,
-  String $auth_conf_owner       = $apt::params::auth_conf_owner,
-  String $root                  = $apt::params::root,
-  String $sources_list          = $apt::params::sources_list,
-  String $sources_list_d        = $apt::params::sources_list_d,
-  String $conf_d                = $apt::params::conf_d,
-  String $preferences           = $apt::params::preferences,
-  String $preferences_d         = $apt::params::preferences_d,
-  String $apt_conf_d            = $apt::params::apt_conf_d,
-  Hash $config_files            = $apt::params::config_files,
-  Boolean $sources_list_force   = $apt::params::sources_list_force,
+  Hash $update_defaults                           = $apt::params::update_defaults,
+  Hash $purge_defaults                            = $apt::params::purge_defaults,
+  Hash $proxy_defaults                            = $apt::params::proxy_defaults,
+  Hash $include_defaults                          = $apt::params::include_defaults,
+  String $provider                                = $apt::params::provider,
+  String $keyserver                               = $apt::params::keyserver,
+  Optional[String] $key_options                   = $apt::params::key_options,
+  Optional[Array[String]] $ppa_options            = $apt::params::ppa_options,
+  Optional[String] $ppa_package                   = $apt::params::ppa_package,
+  Optional[Hash] $backports                       = $apt::params::backports,
+  Hash $confs                                     = $apt::params::confs,
+  Hash $update                                    = $apt::params::update,
+  Hash $purge                                     = $apt::params::purge,
+  Apt::Proxy $proxy                               = $apt::params::proxy,
+  Hash $sources                                   = $apt::params::sources,
+  Hash $keys                                      = $apt::params::keys,
+  Hash $ppas                                      = $apt::params::ppas,
+  Hash $pins                                      = $apt::params::pins,
+  Hash $settings                                  = $apt::params::settings,
+  Boolean $manage_auth_conf                       = $apt::params::manage_auth_conf,
+  Array[Apt::Auth_conf_entry] $auth_conf_entries  = $apt::params::auth_conf_entries,
+  String $auth_conf_owner                         = $apt::params::auth_conf_owner,
+  String $root                                    = $apt::params::root,
+  String $sources_list                            = $apt::params::sources_list,
+  String $sources_list_d                          = $apt::params::sources_list_d,
+  String $conf_d                                  = $apt::params::conf_d,
+  String $preferences                             = $apt::params::preferences,
+  String $preferences_d                           = $apt::params::preferences_d,
+  String $apt_conf_d                              = $apt::params::apt_conf_d,
+  Hash $config_files                              = $apt::params::config_files,
+  Boolean $sources_list_force                     = $apt::params::sources_list_force,
 
   Hash $source_key_defaults = {
     'server'  => $keyserver,
