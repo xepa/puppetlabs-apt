@@ -67,8 +67,9 @@ define apt::ppa (
     $trusted_gpg_d_filename = "${dash_filename_no_specialchars}.gpg"
   }
 
-  # This is the location of our main exec script  
-  $script_path = "/opt/puppetlabs/puppet/cache/add-apt-repository-${dash_filename_no_specialchars}-${release}.sh"
+  # This is the location of our main exec script.
+  $cache_path = $facts['puppet_vardir']
+  $script_path = "${cache_path}/add-apt-repository-${dash_filename_no_specialchars}-${release}.sh"
 
   if $ensure == 'present' {
     if $package_manage {

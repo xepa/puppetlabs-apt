@@ -30,6 +30,7 @@ describe 'apt::ppa' do
             id: 'Ubuntu',
           },
         },
+        puppet_vardir: '/opt/puppetlabs/puppet/cache'
       }
     end
 
@@ -58,6 +59,7 @@ describe 'apt::ppa' do
             id: 'Ubuntu',
           },
         },
+        puppet_vardir: '/opt/puppetlabs/puppet/cache',
       }
     end
 
@@ -96,6 +98,7 @@ describe 'apt::ppa' do
             id: 'Ubuntu',
           },
         },
+        puppet_vardir: '/opt/puppetlabs/puppet/cache',
       }
     end
 
@@ -128,6 +131,7 @@ describe 'apt::ppa' do
             id: 'Ubuntu',
           },
         },
+        puppet_vardir: '/opt/puppetlabs/puppet/cache',
       }
     end
 
@@ -168,6 +172,7 @@ describe 'apt::ppa' do
             id: 'Ubuntu',
           },
         },
+        puppet_vardir: '/opt/puppetlabs/puppet/cache',
       }
     end
 
@@ -210,6 +215,7 @@ describe 'apt::ppa' do
             id: 'Ubuntu',
           },
         },
+        puppet_vardir: '/opt/puppetlabs/puppet/cache',
       }
     end
 
@@ -250,6 +256,7 @@ describe 'apt::ppa' do
             id: 'Ubuntu',
           },
         },
+        puppet_vardir: '/opt/puppetlabs/puppet/cache',
       }
     end
 
@@ -290,6 +297,7 @@ describe 'apt::ppa' do
             id: 'Ubuntu',
           },
         },
+        puppet_vardir: '/opt/puppetlabs/puppet/cache',
       }
     end
 
@@ -328,6 +336,7 @@ describe 'apt::ppa' do
             id: 'Ubuntu',
           },
         },
+        puppet_vardir: '/opt/puppetlabs/puppet/cache',
       }
     end
 
