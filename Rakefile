@@ -42,15 +42,7 @@ def changelog_future_release
 end
 
 PuppetLint.configuration.send('disable_relative')
-PuppetLint.configuration.send('disable_top_scope_facts')
-PuppetLint.configuration.send('disable_topscope_variable')
-PuppetLint.configuration.send('disable_relative_classname_inclusion')
-PuppetLint.configuration.send('disable_parameter_documentation')
 PuppetLint.configuration.send('disable_anchor_resource')
-PuppetLint.configuration.send('disable_strict_indent')
-PuppetLint.configuration.send('disable_unquoted_string_in_case')
-PuppetLint.configuration.send('disable_optional_default')
-
 
 if Bundler.rubygems.find_name('github_changelog_generator').any?
   GitHubChangelogGenerator::RakeTask.new :changelog do |config|

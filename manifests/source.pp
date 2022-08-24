@@ -80,7 +80,7 @@ define apt::source (
   Boolean $notify_update                        = true,
   Boolean $check_valid_until                    = true,
 ) {
-  include ::apt
+  include apt
 
   $_before = Apt::Setting["list-${title}"]
 
@@ -98,7 +98,7 @@ define apt::source (
     if ! $location {
       fail('cannot create a source entry without specifying a location')
     }
-    elsif ($::apt::proxy['https_acng']) and ($location =~ /(?i:^https:\/\/)/) {
+    elsif ($apt::proxy['https_acng']) and ($location =~ /(?i:^https:\/\/)/) {
       $_location = regsubst($location, 'https://','http://HTTPS///')
     }
     else {
@@ -114,7 +114,7 @@ define apt::source (
     $_location = undef
   }
 
-  $includes = merge($::apt::include_defaults, $include)
+  $includes = merge($apt::include_defaults, $include)
 
   if $key and $keyring {
     fail('parameters key and keyring are mutualy exclusive')
@@ -125,7 +125,7 @@ define apt::source (
       unless $key['id'] {
         fail('key hash must contain at least an id entry')
       }
-      $_key = merge($::apt::source_key_defaults, $key)
+      $_key = merge($apt::source_key_defaults, $key)
     } else {
       $_key = { 'id' => assert_type(String[1], $key) }
     }
@@ -140,20 +140,21 @@ define apt::source (
   }
 
   $sourcelist = epp('apt/source.list.epp', {
-    'comment'          => $comment,
-    'includes'         => $includes,
-    'options'          => delete_undef_values( {
-        'arch'              => $architecture,
-        'trusted'           => $allow_unsigned ? { true => 'yes', false => undef },
-        'allow-insecure'    => $allow_insecure ? { true => 'yes', false => undef },
-        'signed-by'         => $keyring,
-        'check-valid-until' => $check_valid_until? { true => undef, false => 'false' },
-      },
-    ),
-    'location'         => $_location,
-    'release'          => $_release,
-    'repos'            => $repos,
-  })
+      'comment'          => $comment,
+      'includes'         => $includes,
+      'options'          => delete_undef_values( {
+          'arch'              => $architecture,
+          'trusted'           => $allow_unsigned ? { true => 'yes', false => undef },
+          'allow-insecure'    => $allow_insecure ? { true => 'yes', false => undef },
+          'signed-by'         => $keyring,
+          'check-valid-until' => $check_valid_until? { true => undef, false => 'false' },
+        },
+      ),
+      'location'         => $_location,
+      'release'          => $_release,
+      'repos'            => $repos,
+    }
+  )
 
   apt::setting { "list-${name}":
     ensure        => $ensure,

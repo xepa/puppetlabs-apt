@@ -55,6 +55,9 @@
 # @option update [Integer] :tries
 #    Specifies how many times to retry the update after receiving a DNS or HTTP error. Default: undef.
 #
+# @param update_defaults
+#   The default update settings that are combined and merged with the passed `update` value
+#
 # @param purge
 #   Specifies whether to purge any existing settings that aren't managed by Puppet. Valid options: a hash made up from the following keys:
 #
@@ -70,8 +73,14 @@
 # @option purge [Boolean] :preferences.d.
 #   Specifies whether to purge any unmanaged entries from preferences.d. Default false.
 #
+# @param purge_defaults
+#   The default purge settings that are combined and merged with the passed `purge` value
+#
 # @param proxy
 #   Configures Apt to connect to a proxy server. Valid options: a hash matching the locally defined type apt::proxy.
+#
+# @param proxy_defaults
+#   The default proxy settings that are combined and merged with the passed `proxy` value
 #
 # @param sources
 #   Creates new `apt::source` resources. Valid options: a hash to be passed to the create_resources function linked above.
@@ -124,6 +133,14 @@
 #
 # @param sources_list_force
 #   Specifies whether to perform force purge or delete. Default false.
+#
+# @param include_defaults
+#
+# @param apt_conf_d
+#   The path to the file `apt.conf.d`
+#
+# @param source_key_defaults
+#   The fault `source_key` settings
 #
 class apt (
   Hash $update_defaults                           = $apt::params::update_defaults,
@@ -183,8 +200,8 @@ class apt (
     assert_type(Integer, $update['tries'])
   }
 
-  $_update = merge($::apt::update_defaults, $update)
-  include ::apt::update
+  $_update = merge($apt::update_defaults, $update)
+  include apt::update
 
   if $purge['sources.list'] {
     assert_type(Boolean, $purge['sources.list'])
@@ -205,24 +222,28 @@ class apt (
     assert_type(Boolean, $purge['apt.conf.d'])
   }
 
-  $_purge = merge($::apt::purge_defaults, $purge)
+  $_purge = merge($apt::purge_defaults, $purge)
 
   if $proxy['perhost'] {
     $_perhost = $proxy['perhost'].map |$item| {
       $_item = merge($apt::proxy_defaults, $item)
       $_scheme = $_item['https'] ? {
         true    => 'https',
-        default => 'http' }
+        default => 'http',
+      }
       $_port = $_item['port'] ? {
         Integer => ":${_item['port']}",
         default => ''
       }
       $_target = $_item['direct'] ? {
         true    => 'DIRECT',
-        default => "${_scheme}://${_item['host']}${_port}/" }
+        default => "${_scheme}://${_item['host']}${_port}/",
+      }
       merge($item, {
-        'scheme' => $_scheme,
-        'target' => $_target })
+          'scheme' => $_scheme,
+          'target' => $_target,
+        }
+      )
     }
   } else {
     $_perhost = {}
@@ -260,7 +281,7 @@ class apt (
       true    => "# Repos managed by puppet.\n",
       default => undef,
     }
-    }
+  }
 
   $preferences_ensure = $_purge['preferences'] ? {
     true    => absent,
@@ -274,7 +295,7 @@ class apt (
 
   file { 'sources.list':
     ensure  => $sources_list_ensure,
-    path    => $::apt::sources_list,
+    path    => $apt::sources_list,
     owner   => root,
     group   => root,
     content => $sources_list_content,
@@ -283,7 +304,7 @@ class apt (
 
   file { 'sources.list.d':
     ensure  => directory,
-    path    => $::apt::sources_list_d,
+    path    => $apt::sources_list_d,
     owner   => root,
     group   => root,
     purge   => $_purge['sources.list.d'],
@@ -293,7 +314,7 @@ class apt (
 
   file { 'preferences':
     ensure => $preferences_ensure,
-    path   => $::apt::preferences,
+    path   => $apt::preferences,
     owner  => root,
     group  => root,
     notify => Class['apt::update'],
@@ -301,7 +322,7 @@ class apt (
 
   file { 'preferences.d':
     ensure  => directory,
-    path    => $::apt::preferences_d,
+    path    => $apt::preferences_d,
     owner   => root,
     group   => root,
     purge   => $_purge['preferences.d'],
@@ -311,7 +332,7 @@ class apt (
 
   file { 'apt.conf.d':
     ensure  => directory,
-    path    => $::apt::apt_conf_d,
+    path    => $apt::apt_conf_d,
     owner   => root,
     group   => root,
     purge   => $_purge['apt.conf.d'],

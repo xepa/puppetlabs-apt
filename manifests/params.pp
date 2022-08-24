@@ -77,10 +77,10 @@ class apt::params {
 
   case $facts['os']['name'] {
     'Debian': {
-          $backports = {
-            'location' => 'http://deb.debian.org/debian',
-            'repos'    => 'main contrib non-free',
-          }
+      $backports = {
+        'location' => 'http://deb.debian.org/debian',
+        'repos'    => 'main contrib non-free',
+      }
       $ppa_options = undef
       $ppa_package = undef
       $auth_conf_owner = '_apt'
