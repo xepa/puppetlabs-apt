@@ -9,7 +9,7 @@ describe 'apt::update', type: :class do
       'we are due for a run'                         => 1_406_660_561,
       'the update-success-stamp file does not exist' => -1,
     }.each_pair do |desc, factval|
-      context "when $::apt_update_last_success indicates #{desc}" do
+      context "when $apt_update_last_success indicates #{desc}" do
         let(:facts) do
           {
             os: {
@@ -24,7 +24,7 @@ describe 'apt::update', type: :class do
                 id: 'Debian',
               },
             },
-            apt_update_last_success: factval,
+            'apt::apt_update_last_success': factval,
           }
         end
         let(:pre_condition) do
@@ -37,7 +37,7 @@ describe 'apt::update', type: :class do
         end
       end
     end
-    context 'when $::apt_update_last_success is nil' do
+    context 'when $apt_update_last_success is nil' do
       let(:facts) do
         {
           os: {
@@ -76,7 +76,7 @@ describe 'apt::update', type: :class do
               id: 'Debian',
             },
           },
-          apt_update_last_success: Time.now.to_i,
+          'apt::apt_update_last_success': Time.now.to_i,
         }
       end
       let(:pre_condition) do
@@ -98,7 +98,7 @@ describe 'apt::update', type: :class do
       'we are due for a run'                         => 1_406_660_561,
       'the update-success-stamp file does not exist' => -1,
     }.each_pair do |desc, factval|
-      context "when $::apt_update_last_success indicates #{desc}" do
+      context "when $apt_update_last_success indicates #{desc}" do
         let(:facts) do
           {
             os: {
@@ -113,7 +113,7 @@ describe 'apt::update', type: :class do
                 id: 'Debian',
               },
             },
-            apt_update_last_success: factval,
+            'apt::apt_update_last_success': factval,
           }
         end
         let(:pre_condition) { "class{ '::apt': update => {'frequency' => 'reluctantly' },}" }
@@ -124,7 +124,7 @@ describe 'apt::update', type: :class do
         end
       end
     end
-    context 'when $::apt_update_last_success is nil' do
+    context 'when $apt_update_last_success is nil' do
       let(:facts) do
         {
           os: {
@@ -152,7 +152,7 @@ describe 'apt::update', type: :class do
   ['daily', 'weekly'].each do |update_frequency|
     context "when apt::update['frequency'] has the value of #{update_frequency}" do
       { 'we are due for a run' => 1_406_660_561, 'the update-success-stamp file does not exist' => -1 }.each_pair do |desc, factval|
-        context "when $::apt_update_last_success indicates #{desc}" do
+        context "when $apt_update_last_success indicates #{desc}" do
           let(:facts) do
             {
               os: {
@@ -167,7 +167,7 @@ describe 'apt::update', type: :class do
                   id: 'Debian',
                 },
               },
-              apt_update_last_success: factval,
+              'apt::apt_update_last_success': factval,
             }
           end
           let(:pre_condition) { "class{ '::apt': update => {'frequency' => '#{update_frequency}',} }" }
@@ -178,7 +178,7 @@ describe 'apt::update', type: :class do
           end
         end
       end
-      context 'when the $::apt_update_last_success fact has a recent value' do
+      context 'when the $apt_update_last_success fact has a recent value' do
         let(:facts) do
           {
             os: {
@@ -193,7 +193,7 @@ describe 'apt::update', type: :class do
                 id: 'Debian',
               },
             },
-            apt_update_last_success: Time.now.to_i,
+            'apt::apt_update_last_success': Time.now.to_i,
           }
         end
         let(:pre_condition) { "class{ '::apt': update => {'frequency' => '#{update_frequency}',} }" }
@@ -203,7 +203,7 @@ describe 'apt::update', type: :class do
           is_expected.to contain_exec('apt_update').with('refreshonly' => true)
         end
       end
-      context 'when $::apt_update_last_success is nil' do
+      context 'when $apt_update_last_success is nil' do
         let(:facts) do
           {
             os: {
@@ -218,7 +218,7 @@ describe 'apt::update', type: :class do
                 id: 'Debian',
               },
             },
-            apt_update_last_success: nil,
+            'apt::apt_update_last_success': nil,
           }
         end
         let(:pre_condition) { "class{ '::apt': update => {'frequency' => '#{update_frequency}',} }" }

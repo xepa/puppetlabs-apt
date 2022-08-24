@@ -76,7 +76,7 @@ class apt::backports (
     }
   }
   unless $location {
-    $_location = $::apt::backports['location']
+    $_location = $apt::backports['location']
   }
   unless $release {
     if fact('os.distro.codename') {
@@ -86,10 +86,10 @@ class apt::backports (
     }
   }
   unless $repos {
-    $_repos = $::apt::backports['repos']
+    $_repos = $apt::backports['repos']
   }
   unless $key {
-    $_key =  $::apt::backports['key']
+    $_key =  $apt::backports['key']
   }
 
   if $pin =~ Hash {

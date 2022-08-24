@@ -605,7 +605,7 @@ Data type: `Pattern[/\A((hkp|hkps|http|https):\/\/)?([a-z\d])([a-z\d-]{0,61}\.)+
 Specifies a keyserver to provide the GPG key. Valid options: a string containing a domain name or a full URL (http://, https://,
 hkp:// or hkps://). The hkps:// protocol is currently only supported on Ubuntu 18.04.
 
-Default value: `$::apt::keyserver`
+Default value: `$apt::keyserver`
 
 ##### <a name="weak_ssl"></a>`weak_ssl`
 
@@ -621,7 +621,7 @@ Data type: `Optional[String]`
 
 Passes additional options to `apt-key adv --keyserver-options`.
 
-Default value: `$::apt::key_options`
+Default value: `$apt::key_options`
 
 ### <a name="aptmark"></a>`apt::mark`
 
@@ -809,7 +809,7 @@ Data type: `Optional[Array[String]]`
 
 Supplies options to be passed to the `add-apt-repository` command. Default: '-y'.
 
-Default value: `$::apt::ppa_options`
+Default value: `$apt::ppa_options`
 
 ##### <a name="release"></a>`release`
 
@@ -835,7 +835,7 @@ Data type: `Optional[String]`
 
 Names the package that provides the `apt-add-repository` command. Default: 'software-properties-common'.
 
-Default value: `$::apt::ppa_package`
+Default value: `$apt::ppa_package`
 
 ##### <a name="package_manage"></a>`package_manage`
 

@@ -40,10 +40,10 @@ define apt::key (
   Enum['present', 'absent', 'refreshed'] $ensure                                                                        = present,
   Optional[String] $content                                                                                             = undef,
   Optional[Pattern[/\Ahttps?:\/\//, /\Aftp:\/\//, /\A\/\w+/]] $source                                                   = undef,
-  Pattern[/\A((hkp|hkps|http|https):\/\/)?([a-z\d])([a-z\d-]{0,61}\.)+[a-z\d]+(:\d{2,5})?(\/[a-zA-Z\d\-_.]+)*\/?$/] $server = $::apt::keyserver,
+  Pattern[/\A((hkp|hkps|http|https):\/\/)?([a-z\d])([a-z\d-]{0,61}\.)+[a-z\d]+(:\d{2,5})?(\/[a-zA-Z\d\-_.]+)*\/?$/] $server = $apt::keyserver,
   Boolean $weak_ssl                                                                                                     = false,
-  Optional[String] $options                                                                                             = $::apt::key_options,
-  ) {
+  Optional[String] $options                                                                                             = $apt::key_options,
+) {
   case $ensure {
     /^(refreshed|present)$/: {
       if defined(Anchor["apt_key ${id} absent"]) {
@@ -82,7 +82,7 @@ define apt::key (
       }
     }
 
-    absent: {
+    /^absent$/: {
       if defined(Anchor["apt_key ${id} present"]) {
         fail("key with id ${id} already ensured as present")
       }
