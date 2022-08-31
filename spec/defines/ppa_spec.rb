@@ -44,6 +44,69 @@ describe 'apt::ppa' do
     }
   end
 
+  [
+    'ppa:foo/bar',
+    'ppa:foo/bar1.0',
+    'ppa:foo10/bar10',
+    'ppa:foo-/bar_',
+  ].each do |value|
+    describe 'valid resource names' do
+      let :facts do
+        {
+          os: {
+            family: 'Debian',
+            name: 'Ubuntu',
+            release: {
+              major: '18',
+              full: '18.04',
+            },
+            distro: {
+              codename: 'trusty',
+              id: 'Ubuntu',
+            },
+          },
+        }
+      end
+
+      let(:title) { value }
+
+      it { is_expected.not_to raise_error }
+      it { is_expected.to contain_exec("add-apt-repository-#{value}") }
+    end
+  end
+
+  [
+    'ppa:foo!/bar',
+    'ppa:foo/bar!',
+    'ppa:foo1.0/bar',
+    'ppa:foo/bar/foobar',
+    '|| ls -la ||',
+    '|| touch /tmp/foo.txt ||',
+  ].each do |value|
+    describe 'invalid resource names' do
+      let :facts do
+        {
+          os: {
+            family: 'Debian',
+            name: 'Ubuntu',
+            release: {
+              major: '18',
+              full: '18.04',
+            },
+            distro: {
+              codename: 'trusty',
+              id: 'Ubuntu',
+            },
+          },
+        }
+      end
+
+      let(:title) { value }
+
+      it { is_expected.to raise_error(Puppet::PreformattedError, %r{Invalid PPA name: #{value}}) }
+    end
+  end
+
   describe 'Ubuntu 15.10 sources.list filename' do
     let :facts do
       {
