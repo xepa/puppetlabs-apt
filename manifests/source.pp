@@ -142,7 +142,7 @@ define apt::source (
   $sourcelist = epp('apt/source.list.epp', {
       'comment'          => $comment,
       'includes'         => $includes,
-      'options'          => delete_undef_values( {
+      'options'          => delete_undef_values({
           'arch'              => $architecture,
           'trusted'           => $allow_unsigned ? { true => 'yes', false => undef },
           'allow-insecure'    => $allow_insecure ? { true => 'yes', false => undef },

@@ -18,11 +18,11 @@ describe 'apt_package_security_dist_updates fact' do
     before(:each) do
       allow(Facter.fact(:osfamily)).to receive(:value).and_return('Debian')
       allow(File).to receive(:executable?) # Stub all other calls
-      allow(Facter::Util::Resolution).to receive(:exec) # Catch all other calls
+      allow(Facter::Core::Execution).to receive(:execute) # Catch all other calls
       allow(File).to receive(:executable?).with('/usr/bin/apt-get').and_return(true)
-      allow(Facter::Util::Resolution).to receive(:exec).with('/usr/bin/apt-get -s -o Debug::NoLocking=true upgrade 2>&1').and_return('test')
+      allow(Facter::Core::Execution).to receive(:execute).with('/usr/bin/apt-get -s -o Debug::NoLocking=true upgrade 2>&1').and_return('test')
       allow(File).to receive(:executable?).with('/usr/bin/apt-get').and_return(true)
-      allow(Facter::Util::Resolution).to receive(:exec).with('/usr/bin/apt-get -s -o Debug::NoLocking=true dist-upgrade 2>&1').and_return(apt_get_upgrade_output)
+      allow(Facter::Core::Execution).to receive(:execute).with('/usr/bin/apt-get -s -o Debug::NoLocking=true dist-upgrade 2>&1').and_return(apt_get_upgrade_output)
     end
 
     describe 'on Debian' do
