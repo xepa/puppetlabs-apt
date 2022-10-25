@@ -113,6 +113,8 @@ define apt::ppa (
         require     => $_require,
       }
     }
+
+    file { "${apt::sources_list_d}/${sources_list_d_filename}": }
   }
   else {
     tidy { "remove-apt-repository-script-${name}":
