@@ -114,7 +114,9 @@ define apt::ppa (
       }
     }
 
-    file { "${apt::sources_list_d}/${sources_list_d_filename}": }
+    file { "${apt::sources_list_d}/${sources_list_d_filename}":
+      require => Exec["add-apt-repository-${name}"],
+    }
   }
   else {
     tidy { "remove-apt-repository-script-${name}":
