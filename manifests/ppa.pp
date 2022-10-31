@@ -111,8 +111,11 @@ define apt::ppa (
         logoutput   => 'on_failure',
         notify      => Class['apt::update'],
         require     => $_require,
+        before      => File["${apt::sources_list_d}/${sources_list_d_filename}"],
       }
     }
+
+    file { "${apt::sources_list_d}/${sources_list_d_filename}": }
   }
   else {
     tidy { "remove-apt-repository-script-${name}":
