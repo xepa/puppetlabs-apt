@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v9.0.1](https://github.com/puppetlabs/puppetlabs-apt/tree/v9.0.1) (2022-12-20)
+
+[Full Changelog](https://github.com/puppetlabs/puppetlabs-apt/compare/v9.0.0...v9.0.1)
+
+### Fixed
+
+- \(bugfix\) - Declare minimum Puppet version 6.24.0 [\#1079](https://github.com/puppetlabs/puppetlabs-apt/pull/1079) ([pmcmaw](https://github.com/pmcmaw))
+- Do not remove PPA sources.list.d files if purge is enabled [\#1069](https://github.com/puppetlabs/puppetlabs-apt/pull/1069) ([Programie](https://github.com/Programie))
+- \(CONT-173\) - Updating deprecated facter instances [\#1068](https://github.com/puppetlabs/puppetlabs-apt/pull/1068) ([jordanbreen28](https://github.com/jordanbreen28))
+- pdksync - \(CONT-130\) Dropping Support for Debian 9 [\#1065](https://github.com/puppetlabs/puppetlabs-apt/pull/1065) ([jordanbreen28](https://github.com/jordanbreen28))
+- \(GH-1057\) Regex fix to allow dotted resources [\#1058](https://github.com/puppetlabs/puppetlabs-apt/pull/1058) ([LukasAud](https://github.com/LukasAud))
+- \(GH-1055\) Fix hardcoded cache path [\#1056](https://github.com/puppetlabs/puppetlabs-apt/pull/1056) ([chelnak](https://github.com/chelnak))
+- \(GH-cat-9\) Update module to match current syntax standard [\#1053](https://github.com/puppetlabs/puppetlabs-apt/pull/1053) ([david22swan](https://github.com/david22swan))
+
 ## [v9.0.0](https://github.com/puppetlabs/puppetlabs-apt/tree/v9.0.0) (2022-08-18)
 
 [Full Changelog](https://github.com/puppetlabs/puppetlabs-apt/compare/v8.5.0...v9.0.0)
