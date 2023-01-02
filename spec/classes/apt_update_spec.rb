@@ -24,7 +24,7 @@ describe 'apt::update', type: :class do
                 id: 'Debian',
               },
             },
-            'apt::apt_update_last_success': factval,
+            'apt_update_last_success': factval,
           }
         end
         let(:pre_condition) do
@@ -76,7 +76,7 @@ describe 'apt::update', type: :class do
               id: 'Debian',
             },
           },
-          'apt::apt_update_last_success': Time.now.to_i,
+          'apt_update_last_success': Time.now.to_i,
         }
       end
       let(:pre_condition) do
@@ -113,7 +113,7 @@ describe 'apt::update', type: :class do
                 id: 'Debian',
               },
             },
-            'apt::apt_update_last_success': factval,
+            'apt_update_last_success': factval,
           }
         end
         let(:pre_condition) { "class{ '::apt': update => {'frequency' => 'reluctantly' },}" }
@@ -167,7 +167,7 @@ describe 'apt::update', type: :class do
                   id: 'Debian',
                 },
               },
-              'apt::apt_update_last_success': factval,
+              'apt_update_last_success': factval,
             }
           end
           let(:pre_condition) { "class{ '::apt': update => {'frequency' => '#{update_frequency}',} }" }
@@ -193,7 +193,7 @@ describe 'apt::update', type: :class do
                 id: 'Debian',
               },
             },
-            'apt::apt_update_last_success': Time.now.to_i,
+            'apt_update_last_success': Time.now.to_i,
           }
         end
         let(:pre_condition) { "class{ '::apt': update => {'frequency' => '#{update_frequency}',} }" }
@@ -218,7 +218,7 @@ describe 'apt::update', type: :class do
                 id: 'Debian',
               },
             },
-            'apt::apt_update_last_success': nil,
+            'apt_update_last_success': nil,
           }
         end
         let(:pre_condition) { "class{ '::apt': update => {'frequency' => '#{update_frequency}',} }" }
