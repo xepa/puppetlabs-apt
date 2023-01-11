@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe 'apt::mark', type: :define do
   let :title do
-    'my_source'
+    'mysource'
   end
 
   let :facts do
@@ -32,7 +32,7 @@ describe 'apt::mark', type: :define do
     end
 
     it {
-      is_expected.to contain_exec('apt-mark manual my_source')
+      is_expected.to contain_exec('apt-mark manual mysource')
     }
   end
 
@@ -51,8 +51,12 @@ describe 'apt::mark', type: :define do
   [
     'package',
     'package1',
-    'package_name',
+    'package.name',
     'package-name',
+    'package+name',
+    'p.ackagename',
+    'p+ackagename',
+    'p+',
   ].each do |value|
     describe 'with a valid resource title' do
       let :title do
@@ -71,13 +75,19 @@ describe 'apt::mark', type: :define do
     end
   end
 
+  # packagenames starting with + are not valid as the title according to puppet
+  # good thing this is also an illegal name for debian packages
   [
     '|| ls -la ||',
     'packakge with space',
     'package<>|',
     '|| touch /tmp/foo.txt ||',
+    'package_name',
+    'PackageName',
+    '.p',
+    'p',
   ].each do |value|
-    describe 'with an invalid resource title' do
+    describe "with an invalid resource title [#{value}]" do
       let :title do
         value
       end
